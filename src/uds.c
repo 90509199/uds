@@ -58,11 +58,11 @@ static void udsServer_sessionControl(UdsDataType *p_udsServerData)
         udsServer_sendResponse(p_udsServerData, UDS_NRC_SUB_FUNCTION_NOT_SUPPORTED);
     } else {
         p_udsServerData->txMsgData[1] = p_udsServerData->subFunction;
-        // 后面跟4个字节的时间参数，用来表示服务端3种状态：肯定响应，否定响应，处理中；这里取固定值设置，外部Tester只是通过加载诊断数据库或者需求规范获知该时间参数；若时间超时NRC返回0x78-->时间怎么比较出是否超时？
+        // 后面跟4个字节的时间参数，用来表示服务端3种状态：肯定响应，否定响应，处理中；这里取固定值设置，外部Tester只是通过加载诊断数据库或者需求规范获知该时间参数；
         p_udsServerData->txMsgData[2] = 0x00;
-        p_udsServerData->txMsgData[3] = 0x32; // p2server_max:50ms，服务端需要在该时间内完成响应，若超时也需要告知客户端，同时按照p2*时间回应
+        p_udsServerData->txMsgData[3] = 0x32; // p2server_max:50ms，指的是ECU在收到请求和给出响应之间的这个时间间隔，他描述了ECU的反应速度
         p_udsServerData->txMsgData[4] = 0x01;
-        p_udsServerData->txMsgData[5] = 0xF4; // p2*server_max:5000ms，若服务端仍未处理完，按照该周期定时发送
+        p_udsServerData->txMsgData[5] = 0xF4; // p2*server_max:5000ms，在ECU给出NRC 78(等待)之后生效，所以会需要更长的反应时间
         p_udsServerData->txMsgLength = 6;
         udsServer_sendResponse(p_udsServerData, UDS_NRC_OK);
     }
