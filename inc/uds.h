@@ -77,7 +77,16 @@ typedef enum
     DEFAULT_SESSION = 0x1,
     PROGRAMMING_SESSION = 0x2,
     EXTEND_SESSION = 0x3
+    /* ... */
 } UDS_SESSION;
+
+typedef enum
+{
+    HRAD_RESET = 0x1,
+    KEY_OFF_ON_RESET = 0x2,
+    SOFT_RESET = 0x3
+    /* ... */
+} UDS_ECU_RESET;
 
 #define UDS_MESSAGE_BUFFER_SIZE 64
 
@@ -103,5 +112,6 @@ static void udsServer_sendResponse(UdsDataType *p_udsServerData, UDS_NRC nrc);
 
 /* service function */
 static void udsServer_sessionControl(UdsDataType *p_udsServerData);
+static void udsServer_ecuReset(UdsDataType *p_udsServerData);
 
 #endif
