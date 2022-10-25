@@ -79,8 +79,8 @@ typedef struct
     uint8_t txMsgData[UDS_MESSAGE_BUFFER_SIZE];
     uint8_t txMsgLength;
 
-    UDS_SID sid;			// service id
-    uint16_t did;		    // data id
+    UDS_SID sid;            // service id
+    uint16_t did;           // data id
     bool subFunctionFlag;   // subFunctionFlag
     uint8_t subFunction;    // subFunction
 } UdsDataType;
