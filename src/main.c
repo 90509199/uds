@@ -13,7 +13,7 @@ int main(int argc, char const *argv[])
 {
     UdsDataType *p_udsServerData = (UdsDataType*)malloc(sizeof(UdsDataType));
     memset(p_udsServerData, 0, sizeof(UdsDataType));
-    for(int i = 0; i < argc; i ++)
+    for(int i = 0; i < argc-2; i ++)
     {
         /* 模拟服务端接收客户端发来的服务请求 */
         p_udsServerData->rxMsgData[i] = (uint8_t)argv[i + 2];
