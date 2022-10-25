@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <errno.h>
 #include <string.h>
+#include <stdint.h>
 
 #define debug(M, ...) fprintf(stderr, "DEBUG %s:%d: " M "\n",\
         __FILE__, __LINE__, ##__VA_ARGS__)
@@ -93,19 +94,14 @@ typedef struct
     uint8_t subFunction;    // subFunction
 } UdsDataType;
 
-UdsDataType udsServerData;
-
 /* client */
-static void udsClient_responseProcess(void);
+static void udsClient_responseProcess(UdsDataType *p_udsServerData);
 
 /* server */
-static void udsServer_requestProcess(void);
-static void udsServer_sendResponse(UDS_NRC nrc);
-
-static void msg_send(UdsDataType);
-static void msg_recieve(UdsDataType*, UdsDataType);
+static void udsServer_requestProcess(UdsDataType *p_udsServerData);
+static void udsServer_sendResponse(UdsDataType *p_udsServerData, UDS_NRC nrc);
 
 /* service function */
-static void udsServer_sessionControl(void);
+static void udsServer_sessionControl(UdsDataType *p_udsServerData);
 
 #endif
