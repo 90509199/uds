@@ -4,6 +4,7 @@
 #include <errno.h>
 #include <string.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #define debug(M, ...) fprintf(stderr, "DEBUG %s:%d: " M "\n",\
         __FILE__, __LINE__, ##__VA_ARGS__)
@@ -90,7 +91,6 @@ typedef struct
 
     UDS_SID sid;            // service id
     uint16_t did;           // data id
-    bool subFunctionFlag;   // subFunctionFlag
     uint8_t subFunction;    // subFunction
 } UdsDataType;
 

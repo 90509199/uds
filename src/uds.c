@@ -50,7 +50,16 @@ static void udsServer_sessionControl(UdsDataType *p_udsServerData)
 {
     if (p_udsServerData->rxMsgLength < 2) {
         udsServer_sendResponse(p_udsServerData, UDS_NRC_INCORRECT_MESSAGE_LENGTH_OR_INVALID_FORMAT);
+    } else if (p_udsServerData->subFunction != DEFAULT_SESSION || p_udsServerData->subFunction != PROGRAMMING_SESSION || p_udsServerData->subFunction != EXTEND_SESSION) {
+        udsServer_sendResponse(p_udsServerData, UDS_NRC_SUB_FUNCTION_NOT_SUPPORTED);
     } else {
+        p_udsServerData->txMsgData[1] = p_udsServerData->subFunction;
+        // 后面跟4个字节的时间参数，这里取固定值
+        p_udsServerData->txMsgData[2] = 0x00;
+        p_udsServerData->txMsgData[3] = 0x32;
+        p_udsServerData->txMsgData[4] = 0x01;
+        p_udsServerData->txMsgData[5] = 0xF4;
+        p_udsServerData->txMsgLength = 6;
         udsServer_sendResponse(p_udsServerData, UDS_NRC_OK);
     }
 }
@@ -66,11 +75,6 @@ static void udsServer_sendResponse(UdsDataType *p_udsServerData, UDS_NRC nrc)
 {
     if (nrc == UDS_NRC_OK) {
         p_udsServerData->txMsgData[0] |= 0x40;
-        if (p_udsServerData->subFunctionFlag) {
-            p_udsServerData->txMsgData[1] = p_udsServerData->subFunction;
-            p_udsServerData->txMsgLength = 2;
-        }
-        p_udsServerData->txMsgLength = 1;
     } else {
         p_udsServerData->txMsgData[0] = 0x7F;
         p_udsServerData->txMsgData[1] = (uint8_t)p_udsServerData->sid;
