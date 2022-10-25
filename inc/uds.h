@@ -36,11 +36,11 @@ typedef enum
 typedef enum 
 {
     UDS_NRC_OK = 0,
-	UDS_NRC_GENERAL_REJECT = 0x11,
-	UDS_NRC_SUB_FUNCTION_NOT_SUPPORTED = 0x12,
-	UDS_NRC_INCORRECT_MESSAGE_LENGTH_OR_INVALID_FORMAT = 0x13,
-	UDS_NRC_CONDITION_NOT_CORRECT = 0x22,
-	UDS_NRC_REQUEST_OUT_OF_RANGE = 0x31,
+    UDS_NRC_GENERAL_REJECT = 0x11,
+    UDS_NRC_SUB_FUNCTION_NOT_SUPPORTED = 0x12,
+    UDS_NRC_INCORRECT_MESSAGE_LENGTH_OR_INVALID_FORMAT = 0x13,
+    UDS_NRC_CONDITION_NOT_CORRECT = 0x22,
+    UDS_NRC_REQUEST_OUT_OF_RANGE = 0x31,
     /* ... */
 } UDS_NRC;
 
@@ -73,14 +73,14 @@ typedef enum
 
 typedef struct
 {
-	uint8_t rxMsgData[UDS_MESSAGE_BUFFER_SIZE];
-	uint8_t rxMsgLength;
+    uint8_t rxMsgData[UDS_MESSAGE_BUFFER_SIZE];
+    uint8_t rxMsgLength;
 
-	uint8_t txMsgData[UDS_MESSAGE_BUFFER_SIZE];
-	uint8_t txMsgLength;
+    uint8_t txMsgData[UDS_MESSAGE_BUFFER_SIZE];
+    uint8_t txMsgLength;
 
-	UDS_SID sid;			// service id
-	uint16_t did;		    // data id
+    UDS_SID sid;			// service id
+    uint16_t did;		    // data id
     bool subFunctionFlag;   // subFunctionFlag
     uint8_t subFunction;    // subFunction
 } UdsDataType;
