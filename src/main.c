@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
     }
     /* 是否有子功能用第一个参数标志：0-无，1-有 */
     p_udsServerData->subFunctionFlag = argv[1];
-    p_udsServerData->rxMsgLength = argc - 1;
+    p_udsServerData->rxMsgLength = argc - 2;
 
     /* 等待服务端响应 */
     udsServer_requestProcess(p_udsServerData);
