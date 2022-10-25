@@ -58,7 +58,7 @@ static void udsServer_sessionControl(UdsDataType *p_udsServerData)
         udsServer_sendResponse(p_udsServerData, UDS_NRC_SUB_FUNCTION_NOT_SUPPORTED);
     } else {
         p_udsServerData->txMsgData[1] = p_udsServerData->subFunction;
-        // 后面跟4个字节的时间参数，用来表示服务端3种状态：肯定响应，否定响应，处理中；这里取固定值，实际是由别的地方设置
+        // 后面跟4个字节的时间参数，用来表示服务端3种状态：肯定响应，否定响应，处理中；这里取固定值，实际是由别的地方设置；若时间超时NRC返回0x78-->时间怎么比较出是否超时？
         p_udsServerData->txMsgData[2] = 0x00;
         p_udsServerData->txMsgData[3] = 0x32; // p2server_max:50ms，服务端需要在该时间内完成响应，若超时也需要告知客户端，同时按照p2*时间回应
         p_udsServerData->txMsgData[4] = 0x01;
