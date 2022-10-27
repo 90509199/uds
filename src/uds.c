@@ -26,6 +26,8 @@ static void udsServer_requestProcess(UdsDataType *p_udsServerData) {
     p_udsServerData->did <<= 8;
     p_udsServerData->did |= p_udsServerData->rxMsgData[2];
 
+    /* 服务器是否在忙？如果忙，返回NRC 0x21 */
+
     // switch services
     switch (p_udsServerData->sid) {
     /* session control：0x10 */
@@ -36,10 +38,9 @@ static void udsServer_requestProcess(UdsDataType *p_udsServerData) {
     case UDS_SID_ECU_RESET:
         udsServer_ecuReset(p_udsServerData);
         break;
-
     default:
-    /* NRC 0x21 */
-        udsServer_sendResponse(p_udsServerData, 0x21);
+    /* NRC 0x11 */
+        udsServer_sendResponse(p_udsServerData, 0x11);
         break;
     }
 }
