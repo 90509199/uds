@@ -1,19 +1,19 @@
-#ifndef _UDS_H_
-#define _UDS_H_
+// Copyright(C) 2022-2023
+#ifndef INC_UDS_H_
+#define INC_UDS_H_
 #include <stdbool.h>
 #include <errno.h>
 #include <string.h>
 #include <stdint.h>
 #include <stdio.h>
 
-#define debug(M, ...) fprintf(stderr, "DEBUG %s:%d: " M "\n",\
+#define debug(M, ...) fprintf(stderr, "DEBUG %s:%d: " M "\n", \
         __FILE__, __LINE__, ##__VA_ARGS__)
 
-#define log_info(M, ...) fprintf(stderr, "[INFO] (%s:%d) " M "\n",\
+#define log_info(M, ...) fprintf(stderr, "[INFO] (%s:%d) " M "\n", \
         __FILE__, __LINE__, ##__VA_ARGS__)
 
-typedef enum
-{
+typedef enum {
     /* service sid */
     UDS_SID_SESSION_CONTROL = 0x10,
     UDS_SID_ECU_RESET = 0x11,
@@ -43,8 +43,7 @@ typedef enum
     UDS_SID_REQUEST_FILE_TRANSFER = 0x38
 } UDS_SID;
 
-typedef enum 
-{
+typedef enum {
     UDS_NRC_OK = 0,
     UDS_NRC_GENERAL_REJECT = 0x11,
     UDS_NRC_SUB_FUNCTION_NOT_SUPPORTED = 0x12,
@@ -55,16 +54,14 @@ typedef enum
     /* ... */
 } UDS_NRC;
 
-typedef enum
-{
+typedef enum {
     /* DTC for chery*/
     CIRCUIT_VOLTAGE_BELOW_THRESHOLD = 0X950016,
     CIRCUIT_VOLTAGE_ABOVE_THRESHOLD = 0X950116
     /* ... */
 } UDS_DTC;
 
-typedef enum
-{
+typedef enum {
     /* DID for chery*/
     VEHICLE_MANUFACTURE_SPARE_PART_NUMBER = 0xF187,
     VEHICLE_MANUFACTURE_ECU_HARD_WARE_NUMBER = 0xF191,
@@ -73,16 +70,14 @@ typedef enum
     /* ... */
 } UDS_DID;
 
-typedef enum
-{
+typedef enum {
     DEFAULT_SESSION = 0x1,
     PROGRAMMING_SESSION = 0x2,
     EXTEND_SESSION = 0x3
     /* ... */
 } UDS_SESSION;
 
-typedef enum
-{
+typedef enum {
     HRAD_RESET = 0x1,
     KEY_OFF_ON_RESET = 0x2,
     SOFT_RESET = 0x3
@@ -91,8 +86,7 @@ typedef enum
 
 #define UDS_MESSAGE_BUFFER_SIZE 64
 
-typedef struct
-{
+typedef struct {
     uint8_t rxMsgData[UDS_MESSAGE_BUFFER_SIZE];
     uint8_t rxMsgLength;
 
@@ -115,4 +109,4 @@ static void udsServer_sendResponse(UdsDataType *p_udsServerData, UDS_NRC nrc);
 static void udsServer_sessionControl(UdsDataType *p_udsServerData);
 static void udsServer_ecuReset(UdsDataType *p_udsServerData);
 
-#endif
+#endif  // INC_UDS_H_

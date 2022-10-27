@@ -1,19 +1,17 @@
 /*
- * main.c
- *
- *  Created on: 2022年10月24日
+ * Copyright(C) 2022-2023
+ *        file: main.c
+ *        date: 2022年10月24日
  *      Author: wzw
  *      useage: 控制台模拟发送客户端服务请求
  */
 #include <malloc.h>
-#include "uds.h"
+#include "inc/uds.h"
 
-int main(int argc, char const *argv[])
-{
-    UdsDataType *p_udsServerData = (UdsDataType*)malloc(sizeof(UdsDataType));
+int main(int argc, char const *argv[]) {
+    UdsDataType *p_udsServerData = (UdsDataType*)malloc(sizeof(UdsDataType));  // NOLINT
     memset(p_udsServerData, 0, sizeof(UdsDataType));
-    for(int i = 0; i < argc-1; i ++)
-    {
+    for (int i = 0; i < argc-1; i ++) {
         /* 模拟服务端接收客户端发来的服务请求 */
         p_udsServerData->rxMsgData[i] = (uint8_t)argv[i + 1];
     }
